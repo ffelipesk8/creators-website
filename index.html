@@ -214,6 +214,121 @@
     .social-links a { width: 36px; height: 36px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: all .2s; }
     .social-links a:hover { border-color: var(--cyan); background: rgba(0,194,224,0.08); }
     .social-links svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.42); }
+
+    /* ══════════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════════ */
+
+    /* ── Tablet (≤1024px) ── */
+    @media (max-width: 1024px) {
+      .nav-inner { padding: 0 24px; }
+      .nav-links { gap: 24px; }
+      .hero { padding: 120px 32px 80px; }
+      .hero-inner { gap: 48px; }
+      .hero-3d-panel { height: 380px; }
+      .credibility { padding: 80px 32px; }
+      .services { padding: 80px 32px; }
+      .education { padding: 80px 32px; }
+      .education-inner { gap: 48px; }
+      .methodology { padding: 80px 32px; }
+      .differentiation { padding: 64px 32px; }
+      .final-cta { padding: 96px 32px; }
+      footer { padding: 56px 32px 28px; }
+      .footer-top { grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; }
+      .footer-top .footer-col:last-child { display: none; }
+      .metrics-row { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .diff-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    }
+
+    /* ── Mobile (≤768px) ── */
+    @media (max-width: 768px) {
+      /* Navbar: oculta links, deja logo + CTA */
+      .nav-links { display: none; }
+      .nav-inner { padding: 0 20px; }
+      .nav-cta { padding: 9px 18px; font-size: 13px; }
+
+      /* Hero: una sola columna, átomo debajo */
+      .hero { padding: 96px 20px 56px; min-height: auto; }
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .hero h1 { font-size: clamp(28px, 8vw, 38px); margin-bottom: 20px; }
+      .hero-sub { font-size: 15px; margin-bottom: 32px; }
+      .hero-actions { flex-direction: column; gap: 12px; }
+      .btn-primary, .btn-ghost { width: 100%; text-align: center; padding: 14px 24px; }
+
+      /* Átomo: más pequeño y sin badge */
+      .hero-3d-panel { height: 240px; margin-top: 40px; }
+      .panel-badge { display: none; }
+
+      /* Secciones: padding reducido */
+      .credibility  { padding: 60px 20px; }
+      .services     { padding: 60px 20px; }
+      .education    { padding: 60px 20px; }
+      .methodology  { padding: 60px 20px; }
+      .differentiation { padding: 52px 20px; }
+      .final-cta    { padding: 72px 20px; }
+      footer        { padding: 48px 20px 24px; }
+
+      /* Texto general */
+      .cred-text h2,
+      .section-header h2 { font-size: clamp(24px, 7vw, 32px); }
+      .cred-text p,
+      .section-header p  { font-size: 15px; }
+      .cred-text { margin-bottom: 40px; }
+
+      /* Métricas: 2 columnas */
+      .metrics-row { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .metric-card { padding: 24px 18px; }
+      .metric-number { font-size: 30px; }
+      .metric-label { font-size: 13px; }
+
+      /* Servicios: 1 columna */
+      .services-grid { grid-template-columns: 1fr; gap: 14px; }
+      .service-card { padding: 26px 22px; }
+
+      /* Educación: 1 columna, mockup abajo */
+      .education-inner { grid-template-columns: 1fr; gap: 40px; }
+      .education-text h2 { font-size: clamp(22px, 7vw, 30px); }
+
+      /* Metodología: 3 × 2 en vez de 6 en línea */
+      .steps-row { grid-template-columns: repeat(3, 1fr); gap: 28px 12px; }
+      .steps-row::before { display: none; }
+      .step-desc { display: none; }
+      .step-num { width: 48px; height: 48px; font-size: 16px; }
+
+      /* Diferenciadores: 1 columna */
+      .diff-grid { grid-template-columns: 1fr; gap: 14px; }
+      .diff-card { padding: 24px 20px; }
+
+      /* CTA final */
+      .final-cta h2 { font-size: clamp(24px, 7vw, 34px); }
+      .final-cta p  { font-size: 15px; margin-bottom: 36px; }
+      .final-cta .btn-primary { width: 100%; text-align: center; padding: 15px 24px; }
+
+      /* Footer: 1 columna */
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+    }
+
+    /* ── Mobile pequeño (≤480px) ── */
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 26px; }
+      .hero-3d-panel { height: 200px; }
+      .metrics-row { grid-template-columns: 1fr 1fr; }
+      .metric-number { font-size: 26px; }
+      .steps-row { grid-template-columns: repeat(2, 1fr); gap: 24px 8px; }
+      .dash-row { grid-template-columns: 1fr 1fr; }
+      .dash-row .dash-stat:last-child { display: none; }
+    }
   </style>
 </head>
 <body>
