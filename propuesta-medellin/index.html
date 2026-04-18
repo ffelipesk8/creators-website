@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GTrust | Propuesta institucional para @medellin</title>
+  <meta
+    name="description"
+    content="Propuesta institucional de GTrust para @medellin: Agentes IA tutores con implementación clara, métricas y escalabilidad."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg: #f7f5f2;
+      --surface: rgba(255, 255, 255, 0.9);
+      --surface-solid: #ffffff;
+      --surface-muted: #f1efeb;
+      --surface-dark: #0f172a;
+      --surface-dark-soft: #111c33;
+      --text: #0f172a;
+      --text-soft: #334155;
+      --text-muted: #64748b;
+      --line: rgba(15, 23, 42, 0.1);
+      --line-strong: rgba(15, 23, 42, 0.16);
+      --accent: #1e293b;
+      --accent-soft: rgba(30, 41, 59, 0.08);
+      --shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+      --shadow-soft: 0 18px 46px rgba(15, 23, 42, 0.06);
+      --radius-xl: 34px;
+      --radius-lg: 28px;
+      --radius-md: 22px;
+      --radius-sm: 18px;
+      --max-width: 1240px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      min-width: 320px;
+      overflow-x: hidden;
+      font-family: "Inter", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(148, 163, 184, 0.08), transparent 28%),
+        radial-gradient(circle at right top, rgba(203, 213, 225, 0.24), transparent 26%),
+        linear-gradient(180deg, #faf8f5 0%, #f4f2ee 52%, #f6f4f1 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .page-shell {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .page-shell::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.46) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.46) 1px, transparent 1px);
+      background-size: 96px 96px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), transparent 72%);
+      opacity: 0.32;
+      z-index: -1;
+    }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      padding: 18px 0 0;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px 22px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+    }
+
+    .brand-block {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .brand-name {
+      font-family: "Fraunces", serif;
+      font-size: 1.2rem;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    .brand-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .topbar-nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-chip {
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid var(--line);
+      font-size: 0.88rem;
+      color: var(--text-soft);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .nav-chip:hover {
+      transform: translateY(-1px);
+      border-color: var(--line-strong);
+    }
+
+    main {
+      padding: 34px 0 42px;
+    }
+
+    section {
+      padding: 34px 0;
+    }
+
+    .hero-grid,
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.85fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-side,
+    .content-card,
+    .metric-board,
+    .dark-card,
+    .summary-card,
+    .implementation-card,
+    .clarity-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-copy {
+      min-height: 640px;
+      padding: 38px;
+      background:
+        radial-gradient(circle at top right, rgba(226, 232, 240, 0.9), transparent 30%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 246, 243, 0.92));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 26px;
+    }
+
+    .hero-copy::after,
+    .summary-card::after,
+    .dark-card::after,
+    .content-card::after,
+    .implementation-card::after,
+    .clarity-card::after {
+      content: "";
+      position: absolute;
+      inset: auto auto 0 0;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(148, 163, 184, 0.12), transparent 68%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      color: var(--text-soft);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #475569;
+      box-shadow: 0 0 0 5px rgba(71, 85, 105, 0.12);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: "Fraunces", serif;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--text);
+    }
+
+    h1 {
+      max-width: 11ch;
+      font-size: clamp(2.9rem, 6vw, 5.4rem);
+      line-height: 0.95;
+    }
+
+    .lead {
+      max-width: 64ch;
+      font-size: 1.06rem;
+      line-height: 1.9;
+      color: var(--text-soft);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+      white-space: nowrap;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button.primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 16px 32px rgba(15, 23, 42, 0.18);
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.86);
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .button.ghost {
+      background: rgba(255, 255, 255, 0.56);
+      border-color: rgba(15, 23, 42, 0.08);
+      color: var(--text-soft);
+    }
+
+    .button svg {
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+    }
+
+    .hero-note {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    .hero-note span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 18px;
+    }
+
+    .summary-card,
+    .metric-board,
+    .content-card,
+    .implementation-card,
+    .clarity-card {
+      background: rgba(255, 255, 255, 0.92);
+      padding: 28px;
+    }
+
+    .summary-card {
+      min-height: 430px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      background:
+        radial-gradient(circle at top, rgba(226, 232, 240, 0.8), transparent 34%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(247, 245, 241, 0.92));
+    }
+
+    .card-heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .card-heading h2,
+    .card-heading h3 {
+      font-size: clamp(1.7rem, 3vw, 2.2rem);
+      line-height: 1;
+    }
+
+    .card-heading p {
+      font-size: 0.96rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(241, 245, 249, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      color: var(--text-soft);
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+
+    .status-pill::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #0f766e;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat-card {
+      padding: 20px;
+      border-radius: var(--radius-md);
+      background: rgba(248, 250, 252, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.14);
+    }
+
+    .stat-number {
+      margin-bottom: 8px;
+      font-family: "Fraunces", serif;
+      font-size: 2rem;
+      line-height: 0.95;
+      color: var(--text);
+      letter-spacing: -0.04em;
+    }
+
+    .stat-label {
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: var(--text-soft);
+    }
+
+    .scope-box,
+    .inner-box,
+    .timeline-box,
+    .price-box {
+      padding: 22px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: rgba(250, 250, 249, 0.9);
+    }
+
+    .scope-box h3,
+    .inner-box h3,
+    .timeline-box h3,
+    .price-box h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .scope-box p,
+    .inner-box p,
+    .timeline-box p,
+    .price-box p {
+      color: var(--text-soft);
+      font-size: 0.96rem;
+      line-height: 1.75;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2rem, 4vw, 3.35rem);
+      line-height: 0.96;
+      max-width: 12ch;
+    }
+
+    .section-head p {
+      max-width: 66ch;
+      color: var(--text-soft);
+      font-size: 1rem;
+      line-height: 1.85;
+    }
+
+    .options-grid,
+    .scale-grid,
+    .process-grid,
+    .mini-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .options-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .scale-grid,
+    .mini-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .process-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .content-card,
+    .dark-card,
+    .implementation-card,
+    .clarity-card {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .dark-card {
+      padding: 30px;
+      background:
+        radial-gradient(circle at top right, rgba(148, 163, 184, 0.16), transparent 28%),
+        linear-gradient(180deg, #0f172a, #162033);
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 28px 72px rgba(15, 23, 42, 0.22);
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .dark-card h3,
+    .dark-card h4,
+    .dark-card .label,
+    .dark-card .stat-number,
+    .dark-card .price-big,
+    .dark-card .price-small {
+      color: #ffffff;
+    }
+
+    .dark-card p,
+    .dark-card li,
+    .dark-card .muted {
+      color: rgba(226, 232, 240, 0.74);
+    }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      background: rgba(248, 250, 252, 0.74);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-soft);
+    }
+
+    .dark-card .label {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .option-heading h3,
+    .process-heading h3,
+    .scale-card h3,
+    .mini-box h3 {
+      font-size: 1.7rem;
+      line-height: 1;
+    }
+
+    .option-heading p,
+    .process-heading p,
+    .scale-card p,
+    .mini-box p {
+      margin-top: 12px;
+      line-height: 1.75;
+      color: var(--text-soft);
+      font-size: 0.96rem;
+    }
+
+    .dark-card .option-heading p,
+    .dark-card .mini-box p {
+      color: rgba(226, 232, 240, 0.72);
+    }
+
+    .price-box {
+      display: grid;
+      gap: 14px;
+      background: rgba(248, 250, 252, 0.92);
+    }
+
+    .dark-card .price-box {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .price-line {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 14px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+    }
+
+    .price-line:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .price-big {
+      font-family: "Fraunces", serif;
+      font-size: clamp(2rem, 4vw, 2.7rem);
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+      color: var(--text);
+    }
+
+    .price-small {
+      color: var(--text-soft);
+      font-size: 0.92rem;
+      text-align: right;
+      line-height: 1.5;
+      max-width: 14ch;
+    }
+
+    .feature-list,
+    .metrics-list,
+    .clarity-list {
+      display: grid;
+      gap: 12px;
+      list-style: none;
+    }
+
+    .feature-list li,
+    .metrics-list li,
+    .clarity-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      line-height: 1.65;
+      color: var(--text-soft);
+      font-size: 0.97rem;
+    }
+
+    .feature-list svg,
+    .metrics-list svg,
+    .clarity-list svg {
+      width: 18px;
+      height: 18px;
+      margin-top: 4px;
+      flex-shrink: 0;
+      color: #475569;
+    }
+
+    .dark-card .feature-list svg {
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .scale-card,
+    .mini-box {
+      padding: 26px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .scale-card {
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .scale-icon,
+    .mini-icon,
+    .process-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(30, 41, 59, 0.08);
+    }
+
+    .scale-icon svg,
+    .mini-icon svg,
+    .process-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .dashboard-grid {
+      align-items: start;
+    }
+
+    .metric-board {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .metrics-list li {
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .metrics-list li:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .dashboard-card {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      padding: 28px;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        radial-gradient(circle at top right, rgba(148, 163, 184, 0.16), transparent 24%),
+        linear-gradient(180deg, #0f172a, #111c33);
+      color: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.24);
+    }
+
+    .dashboard-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .dashboard-head h3 {
+      font-size: 2rem;
+      color: #fff;
+    }
+
+    .dashboard-head p {
+      margin-top: 10px;
+      font-size: 0.94rem;
+      color: rgba(226, 232, 240, 0.68);
+      line-height: 1.7;
+    }
+
+    .dashboard-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .dashboard-stat {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .dashboard-stat strong {
+      display: block;
+      margin-top: 8px;
+      font-family: "Fraunces", serif;
+      font-size: 1.75rem;
+      line-height: 0.95;
+      color: #fff;
+    }
+
+    .dashboard-stat span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(226, 232, 240, 0.7);
+      font-size: 0.86rem;
+    }
+
+    .dashboard-chart {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .chart-label {
+      margin-bottom: 16px;
+      color: rgba(226, 232, 240, 0.7);
+      font-size: 0.88rem;
+    }
+
+    .bars {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+      align-items: end;
+      height: 140px;
+    }
+
+    .bar {
+      border-radius: 999px 999px 14px 14px;
+      background: linear-gradient(180deg, rgba(226, 232, 240, 0.28), rgba(148, 163, 184, 0.18));
+      height: var(--bar-height);
+      min-height: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bar::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.34), transparent 60%);
+    }
+
+    .bar.active {
+      background: linear-gradient(180deg, #cbd5e1, #64748b);
+    }
+
+    .clarity-card {
+      background:
+        radial-gradient(circle at top left, rgba(226, 232, 240, 0.84), transparent 28%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(246, 244, 240, 0.9));
+    }
+
+    .clarity-grid {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .process-grid .implementation-card {
+      min-height: 280px;
+    }
+
+    .step-number {
+      font-family: "Fraunces", serif;
+      font-size: 2.1rem;
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+      color: var(--text);
+    }
+
+    .process-title {
+      display: grid;
+      gap: 14px;
+    }
+
+    .process-title h3 {
+      font-size: 1.55rem;
+      line-height: 1;
+    }
+
+    .process-title p {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--text-soft);
+    }
+
+    .closing {
+      padding-bottom: 64px;
+    }
+
+    .closing-card {
+      padding: 38px;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        radial-gradient(circle at top right, rgba(148, 163, 184, 0.18), transparent 24%),
+        linear-gradient(180deg, #0f172a, #111827);
+      color: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 34px 90px rgba(15, 23, 42, 0.24);
+    }
+
+    .closing-card .section-head h2,
+    .closing-card .section-head p,
+    .closing-card .label {
+      color: #fff;
+    }
+
+    .closing-card .section-head p {
+      color: rgba(226, 232, 240, 0.72);
+    }
+
+    .closing-card .label {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .closing-card .mini-box {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.09);
+      color: rgba(255, 255, 255, 0.82);
+      box-shadow: none;
+    }
+
+    .closing-card .mini-box h3 {
+      color: #fff;
+    }
+
+    .closing-card .mini-box p {
+      color: rgba(226, 232, 240, 0.72);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+
+    .print-only {
+      display: none;
+    }
+
+    @media (max-width: 1120px) {
+      .hero-grid,
+      .dashboard-grid,
+      .clarity-grid,
+      .options-grid,
+      .scale-grid,
+      .mini-grid,
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        min-height: auto;
+      }
+
+      .section-head h2 {
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 840px) {
+      .topbar-inner {
+        border-radius: 30px;
+        padding: 18px;
+      }
+
+      .topbar {
+        position: static;
+      }
+
+      .topbar-inner,
+      .card-heading,
+      .dashboard-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .topbar-nav {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .nav-chip {
+        flex: 1 1 calc(50% - 10px);
+        text-align: center;
+      }
+
+      main {
+        padding-top: 20px;
+      }
+
+      .hero-copy,
+      .summary-card,
+      .metric-board,
+      .dashboard-card,
+      .content-card,
+      .dark-card,
+      .implementation-card,
+      .clarity-card,
+      .closing-card {
+        padding: 24px;
+      }
+
+      h1 {
+        max-width: 12ch;
+        font-size: clamp(2.4rem, 12vw, 3.8rem);
+      }
+
+      .hero-actions,
+      .button-row {
+        width: 100%;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .stats-grid,
+      .dashboard-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        width: min(calc(100% - 18px), var(--max-width));
+      }
+
+      section {
+        padding: 22px 0;
+      }
+
+      .topbar {
+        padding-top: 10px;
+      }
+
+      .topbar-inner {
+        border-radius: 24px;
+      }
+
+      .nav-chip {
+        flex-basis: 100%;
+      }
+
+      .hero-copy,
+      .summary-card,
+      .metric-board,
+      .dashboard-card,
+      .content-card,
+      .dark-card,
+      .implementation-card,
+      .clarity-card,
+      .closing-card,
+      .scale-card,
+      .mini-box {
+        border-radius: 24px;
+      }
+
+      .bars {
+        height: 110px;
+        gap: 8px;
+      }
+
+      .dashboard-stat strong,
+      .stat-number,
+      .price-big {
+        font-size: 1.7rem;
+      }
+    }
+
+    @media print {
+      :root {
+        --bg: #ffffff;
+        --surface: #ffffff;
+        --surface-solid: #ffffff;
+        --surface-muted: #ffffff;
+        --line: rgba(15, 23, 42, 0.14);
+      }
+
+      html,
+      body {
+        background: #ffffff !important;
+      }
+
+      body {
+        overflow: visible;
+      }
+
+      .page-shell::before,
+      .topbar,
+      .hero-actions,
+      .print-hide {
+        display: none !important;
+      }
+
+      .print-only {
+        display: block;
+      }
+
+      main {
+        padding: 0;
+      }
+
+      section {
+        padding: 14px 0;
+        page-break-inside: avoid;
+      }
+
+      .container {
+        width: 100%;
+      }
+
+      .hero-grid,
+      .dashboard-grid,
+      .clarity-grid,
+      .options-grid,
+      .scale-grid,
+      .mini-grid,
+      .process-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .hero-copy,
+      .summary-card,
+      .metric-board,
+      .dashboard-card,
+      .content-card,
+      .dark-card,
+      .implementation-card,
+      .clarity-card,
+      .closing-card,
+      .scale-card,
+      .mini-box {
+        box-shadow: none !important;
+        background: #ffffff !important;
+        color: #0f172a !important;
+        border: 1px solid rgba(15, 23, 42, 0.12) !important;
+      }
+
+      .dark-card *,
+      .dashboard-card *,
+      .closing-card * {
+        color: #0f172a !important;
+      }
+
+      .label,
+      .status-pill,
+      .eyebrow,
+      .nav-chip {
+        background: #ffffff !important;
+      }
+
+      .bar,
+      .bar.active {
+        background: #cbd5e1 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="container">
+        <div class="topbar-inner reveal is-visible">
+          <div class="brand-block">
+            <span class="brand-name">GTrust</span>
+            <span class="brand-subtitle">Propuesta institucional para @medellin</span>
+          </div>
+          <nav class="topbar-nav" aria-label="Secciones de la propuesta">
+            <a class="nav-chip" href="#opciones">Opciones</a>
+            <a class="nav-chip" href="#dashboard">Dashboard</a>
+            <a class="nav-chip" href="#escalabilidad">Escalabilidad</a>
+            <a class="nav-chip" href="#implementacion">Implementación</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section aria-labelledby="hero-title">
+        <div class="container hero-grid">
+          <article class="hero-copy reveal is-visible">
+            <div style="display: grid; gap: 22px;">
+              <span class="eyebrow">Agentes IA tutores para educación digital</span>
+              <div style="display: grid; gap: 22px;">
+                <h1 id="hero-title">Acompañamiento inteligente para estudiantes, con una propuesta clara, medible y escalable.</h1>
+                <p class="lead">
+                  GTrust propone una solución de agentes IA tutores para fortalecer la experiencia educativa de @medellin,
+                  resolver dudas en tiempo real y ofrecer control institucional a través de métricas, seguimiento y escalabilidad por volumen.
+                </p>
+              </div>
+            </div>
+
+            <div style="display: grid; gap: 18px;">
+              <div class="hero-actions">
+                <div class="button-row">
+                  <a class="button primary" href="#opciones">
+                    Ver propuesta
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M5 12h14"></path>
+                      <path d="m12 5 7 7-7 7"></path>
+                    </svg>
+                  </a>
+                  <a class="button secondary" href="#comparativo">Comparar opciones</a>
+                </div>
+                <button class="button ghost print-hide" type="button" id="download-pdf">
+                  Descargar PDF
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 3v12"></path>
+                    <path d="m7 10 5 5 5-5"></path>
+                    <path d="M5 21h14"></path>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="hero-note">
+                <span>Enfoque institucional</span>
+                <span>Sin fricción para operación</span>
+                <span>Listo para imprimir en PDF</span>
+              </div>
+            </div>
+          </article>
+
+          <aside class="hero-side">
+            <article class="summary-card reveal is-visible reveal-delay-1">
+              <div class="card-heading">
+                <div>
+                  <h2>Resumen ejecutivo</h2>
+                  <p>Una propuesta sobria, directa y pensada para activar capacidad educativa con control institucional.</p>
+                </div>
+                <span class="status-pill">Documento activo</span>
+              </div>
+
+              <div class="stats-grid">
+                <div class="stat-card">
+                  <div class="stat-number">24/7</div>
+                  <div class="stat-label">Acompañamiento automatizado</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-number">2</div>
+                  <div class="stat-label">Opciones claras de implementación</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-number">20+</div>
+                  <div class="stat-label">Agentes para activar retención</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-number">100%</div>
+                  <div class="stat-label">Enfoque en educación y seguimiento</div>
+                </div>
+              </div>
+
+              <div class="scope-box">
+                <h3>Alcance base por agente</h3>
+                <p>
+                  Entrenamiento por curso, respuestas sobre contenidos, refuerzo del aprendizaje y visualización de métricas clave
+                  para control institucional.
+                </p>
+              </div>
+            </article>
+          </aside>
+        </div>
+      </section>
+
+      <section id="opciones" aria-labelledby="options-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">Opciones de implementación</span>
+            <h2 id="options-title">Dos caminos claros para activar la solución</h2>
+            <p>
+              La propuesta está diseñada para que @medellin elija entre una operación completamente administrada por GTrust
+              o una implementación propia con transferencia de conocimiento.
+            </p>
+          </div>
+
+          <div class="options-grid" id="comparativo">
+            <article class="content-card reveal">
+              <span class="label">Opción 1</span>
+              <div class="option-heading">
+                <h3>Servicio administrado por GTrust</h3>
+                <p>
+                  GTrust opera la solución completa: infraestructura, mantenimiento, continuidad técnica e integración del modelo
+                  de inteligencia artificial.
+                </p>
+              </div>
+
+              <div class="price-box">
+                <div class="price-line">
+                  <div class="price-big">$18M</div>
+                  <div class="price-small">por agente + IVA</div>
+                </div>
+                <div class="price-line">
+                  <div class="price-big">$1M</div>
+                  <div class="price-small">mensuales por agente + IVA</div>
+                </div>
+              </div>
+
+              <ul class="feature-list" aria-label="Incluye opción 1">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Desarrollo e implementación del agente</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Infraestructura y operación administrada por GTrust</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Mantenimiento técnico mensual</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Integración del modelo de IA</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Soporte y continuidad operativa</li>
+              </ul>
+            </article>
+
+            <article class="dark-card reveal reveal-delay-1">
+              <span class="label">Opción 2</span>
+              <div class="option-heading">
+                <h3>Implementación en infraestructura de @medellin</h3>
+                <p>
+                  GTrust desarrolla e instala los agentes directamente en el ambiente de @medellin y entrega el conocimiento
+                  para su administración interna.
+                </p>
+              </div>
+
+              <div class="price-box">
+                <div class="price-line">
+                  <div class="price-big">$18M</div>
+                  <div class="price-small">por agente + IVA</div>
+                </div>
+                <div class="price-line">
+                  <div class="price-big">$3M</div>
+                  <div class="price-small">por transferencia e implementación + IVA</div>
+                </div>
+              </div>
+
+              <ul class="feature-list" aria-label="Incluye opción 2">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Desarrollo e implementación del agente</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Instalación en la infraestructura de @medellin</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Transferencia de conocimiento</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Capacitación técnica del equipo interno</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Autonomía total sobre la operación</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="escalabilidad" aria-labelledby="scale-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">Escalabilidad</span>
+            <h2 id="scale-title">Beneficios pensados para crecer por volumen</h2>
+            <p>
+              A medida que aumenta el número de agentes, la solución incorpora más valor institucional: actualización,
+              optimización y seguimiento a usuarios con foco en permanencia y comunicación.
+            </p>
+          </div>
+
+          <div class="scale-grid">
+            <article class="scale-card reveal">
+              <div style="display: grid; gap: 18px;">
+                <span class="scale-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 20V10"></path>
+                    <path d="m18 20-6-6-6 6"></path>
+                    <path d="M5 4h14"></path>
+                  </svg>
+                </span>
+                <div class="option-heading">
+                  <h3>0 a 10 agentes</h3>
+                  <p>Implementación estándar sin beneficios adicionales.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="scale-card reveal reveal-delay-1">
+              <div style="display: grid; gap: 18px;">
+                <span class="scale-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 20V4"></path>
+                    <path d="m5 13 7 7 7-7"></path>
+                  </svg>
+                </span>
+                <div class="option-heading">
+                  <h3>10 a 20 agentes</h3>
+                  <p>Incluye 1 actualización anual de contenido de los agentes.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="scale-card reveal reveal-delay-2">
+              <div style="display: grid; gap: 18px;">
+                <span class="scale-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19h16"></path>
+                    <path d="M4 15h10"></path>
+                    <path d="M4 11h16"></path>
+                    <path d="M4 7h10"></path>
+                  </svg>
+                </span>
+                <div class="option-heading">
+                  <h3>20 a 50 agentes</h3>
+                  <p>
+                    Incluye 2 optimizaciones anuales de los agentes y 1 agente adicional de seguimiento, retención y comunicación
+                    a usuarios con consentimiento.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="dashboard" aria-labelledby="dashboard-title">
+        <div class="container dashboard-grid">
+          <article class="metric-board reveal">
+            <div class="section-head" style="margin-bottom: 0;">
+              <span class="eyebrow">Dashboard y control</span>
+              <h2 id="dashboard-title">Métricas reales para tomar decisiones sobre cada curso</h2>
+              <p>
+                Cada tutor cuenta con un dashboard de seguimiento que permite ver uso, interacción, alertas e información accionable
+                para entender qué está pasando en cada curso y cómo avanzan los estudiantes.
+              </p>
+            </div>
+
+            <ul class="metrics-list" aria-label="Métricas disponibles">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15.5 11 11l3 3 7-7"/></svg>Número de estudiantes interactuando con cada agente</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg>Frecuencia de uso por curso</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Preguntas y temas más consultados</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>Nivel de actividad por estudiante</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>Alertas sobre inactividad o bajo avance</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V4.75A1.75 1.75 0 0 1 5.75 3h12.5A1.75 1.75 0 0 1 20 4.75V19.5"/><path d="M8 7h8"/><path d="M8 11h8"/><path d="M8 15h5"/></svg>Lectura de puntos críticos dentro del curso</li>
+            </ul>
+          </article>
+
+          <aside class="dashboard-card reveal reveal-delay-1">
+            <div class="dashboard-head">
+              <div>
+                <h3>Dashboard tutor · Curso ejemplo</h3>
+                <p>Visibilidad institucional por agente</p>
+              </div>
+              <span class="status-pill">Activo</span>
+            </div>
+
+            <div class="dashboard-stats">
+              <div class="dashboard-stat"><span>Usuarios activos</span><strong>1,284</strong></div>
+              <div class="dashboard-stat"><span>Interacciones</span><strong>8,930</strong></div>
+              <div class="dashboard-stat"><span>Alertas de inactividad</span><strong>94</strong></div>
+              <div class="dashboard-stat"><span>Curso revisado</span><strong>Módulo 4</strong></div>
+            </div>
+
+            <div class="dashboard-chart">
+              <div class="chart-label">Nivel de uso por unidad</div>
+              <div class="bars" aria-hidden="true">
+                <div class="bar" style="--bar-height: 42%;"></div>
+                <div class="bar" style="--bar-height: 58%;"></div>
+                <div class="bar active" style="--bar-height: 84%;"></div>
+                <div class="bar" style="--bar-height: 64%;"></div>
+                <div class="bar" style="--bar-height: 72%;"></div>
+                <div class="bar" style="--bar-height: 52%;"></div>
+              </div>
+            </div>
+
+            <div class="inner-box">
+              <h3>Agente de seguimiento y retención</h3>
+              <p>
+                Disponible en el bloque de 20 a 50 agentes para enviar recordatorios y comunicaciones a usuarios con consentimiento,
+                con base en información proveniente de los sistemas de @medellin.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section aria-labelledby="clarity-title">
+        <div class="container clarity-grid">
+          <article class="clarity-card reveal">
+            <span class="eyebrow">Alcance del agente de seguimiento</span>
+            <div class="section-head" style="margin-bottom: 0;">
+              <h2 id="clarity-title">Una automatización útil, clara y controlada por la institución</h2>
+              <p>
+                Este componente se integra como una capacidad de seguimiento y comunicación. No reemplaza el criterio institucional:
+                automatiza la lógica operativa con base en reglas, consentimiento y señales reales de uso.
+              </p>
+            </div>
+          </article>
+
+          <article class="content-card reveal reveal-delay-1">
+            <ul class="clarity-list" aria-label="Aclaraciones del agente">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Este agente permite recibir y procesar información proveniente de los sistemas de @medellin.</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Detecta patrones de uso, inactividad o bajo avance.</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Permite enviar recordatorios automáticos a estudiantes que hayan dado consentimiento.</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Permite compartir información relevante sobre actividades clave.</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Permite promocionar cursos, contenidos o iniciativas definidas por @medellin.</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>GTrust no crea el contenido institucional: automatiza la lógica del sistema sobre lineamientos definidos por @medellin.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="implementacion" aria-labelledby="implementation-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">Implementación</span>
+            <h2 id="implementation-title">Un proceso simple para convertir contenido en acompañamiento real</h2>
+            <p>
+              La activación está pensada para ser clara desde el inicio: diagnóstico, configuración, despliegue y lectura de métricas
+              para seguimiento institucional.
+            </p>
+          </div>
+
+          <div class="process-grid">
+            <article class="implementation-card reveal">
+              <span class="process-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5A8.38 8.38 0 0 1 12.5 20 8.5 8.5 0 1 1 20 11.5"></path><path d="M22 4 12 14.01l-3-3"></path></svg></span>
+              <div class="process-title">
+                <div class="step-number">01</div>
+                <h3>Diagnóstico</h3>
+                <p>Revisión de cursos, flujos de atención, contenidos y objetivos por agente.</p>
+              </div>
+            </article>
+
+            <article class="implementation-card reveal reveal-delay-1">
+              <span class="process-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 1 1 3 3L7 19l-4 1 1-4Z"></path></svg></span>
+              <div class="process-title">
+                <div class="step-number">02</div>
+                <h3>Configuración</h3>
+                <p>Diseño del tutor, estructura de conocimiento y comportamiento de respuesta.</p>
+              </div>
+            </article>
+
+            <article class="implementation-card reveal reveal-delay-2">
+              <span class="process-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M7 20h10"></path><path d="M12 16v4"></path></svg></span>
+              <div class="process-title">
+                <div class="step-number">03</div>
+                <h3>Implementación</h3>
+                <p>Despliegue administrado por GTrust o instalación en infraestructura propia.</p>
+              </div>
+            </article>
+
+            <article class="implementation-card reveal reveal-delay-3">
+              <span class="process-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path></svg></span>
+              <div class="process-title">
+                <div class="step-number">04</div>
+                <h3>Seguimiento</h3>
+                <p>Visualización de métricas, uso, engagement y alertas para toma de decisiones.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="closing" aria-labelledby="closing-title">
+        <div class="container">
+          <article class="closing-card reveal">
+            <div class="section-head">
+              <span class="label">Cierre</span>
+              <h2 id="closing-title">No es solo resolver dudas. Es ayudar a que más estudiantes continúen y terminen sus cursos.</h2>
+              <p>
+                GTrust transforma el conocimiento de @medellin en una experiencia educativa más clara, más medible y más escalable,
+                con agentes tutores, seguimiento inteligente y visibilidad institucional.
+              </p>
+            </div>
+
+            <div class="mini-grid">
+              <div class="mini-box">
+                <span class="mini-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 1 9l11 6 9-4.91"></path><path d="m1 9 11 6 11-6"></path><path d="M12 15v6"></path></svg></span>
+                <h3>Tutorización inteligente</h3>
+                <p>Acompañamiento oportuno y coherente con cada curso.</p>
+              </div>
+
+              <div class="mini-box">
+                <span class="mini-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M7 14h3"></path><path d="M7 10h7"></path><path d="M7 6h10"></path></svg></span>
+                <h3>Visión educativa con datos</h3>
+                <p>Métricas accionables para lectura institucional y mejora continua.</p>
+              </div>
+
+              <div class="mini-box">
+                <span class="mini-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="2"></rect><rect x="14" y="3" width="7" height="7" rx="2"></rect><rect x="14" y="14" width="7" height="7" rx="2"></rect><rect x="3" y="14" width="7" height="7" rx="2"></rect></svg></span>
+                <h3>Escalabilidad por volumen</h3>
+                <p>Una arquitectura pensada para crecer sin perder control ni claridad.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.16,
+        rootMargin: "0px 0px -40px 0px",
+      },
+    );
+
+    document.querySelectorAll(".reveal:not(.is-visible)").forEach((element) => {
+      observer.observe(element);
+    });
+
+    const printButton = document.getElementById("download-pdf");
+    if (printButton) {
+      printButton.addEventListener("click", () => {
+        window.print();
+      });
+    }
+  </script>
+</body>
+</html>
