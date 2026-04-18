@@ -1454,14 +1454,14 @@
                   </a>
                   <a class="button secondary" href="#comparativo">Comparar opciones</a>
                 </div>
-                <button class="button ghost print-hide" type="button" id="download-pdf">
+                <a class="button ghost print-hide" href="/propuesta-medellin/pdf/">
                   Descargar PDF
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M12 3v12"></path>
                     <path d="m7 10 5 5 5-5"></path>
                     <path d="M5 21h14"></path>
                   </svg>
-                </button>
+                </a>
               </div>
 
               <div class="hero-note">
@@ -1842,13 +1842,6 @@
     document.querySelectorAll(".reveal:not(.is-visible)").forEach((element) => {
       observer.observe(element);
     });
-
-    const printButton = document.getElementById("download-pdf");
-    if (printButton) {
-      printButton.addEventListener("click", () => {
-        window.print();
-      });
-    }
   </script>
 </body>
 </html>
