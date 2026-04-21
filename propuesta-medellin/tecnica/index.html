@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GTrust | Especificación técnica para @medellin</title>
+  <meta
+    name="description"
+    content="Especificación técnica de GTrust para @medellin: canales, stack, contexto, consumo e infraestructura."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg: #f7f5f2;
+      --paper: #ffffff;
+      --ink: #0f172a;
+      --muted: #475569;
+      --soft: #64748b;
+      --line: rgba(15, 23, 42, 0.12);
+      --surface: #f8fafc;
+      --surface-strong: #eef2f7;
+      --accent: #111827;
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      min-width: 320px;
+      font-family: "Inter", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(148, 163, 184, 0.16), transparent 28%),
+        linear-gradient(180deg, #fbfaf8 0%, #f4f2ee 58%, #f7f5f2 100%);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      border: 0;
+      background: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Fraunces", serif;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+    }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 18px 0 0;
+    }
+
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 18px 44px rgba(15, 23, 42, 0.07);
+    }
+
+    .brand {
+      display: grid;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .brand strong {
+      font-family: "Fraunces", serif;
+      font-size: 1.18rem;
+      line-height: 1;
+    }
+
+    .brand span {
+      color: var(--soft);
+      font-size: 0.82rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .chip,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 15px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.76);
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 16px 32px rgba(15, 23, 42, 0.16);
+    }
+
+    main {
+      padding: 34px 0 64px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(320px, 0.96fr);
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 28px;
+    }
+
+    .hero-panel,
+    .side-panel,
+    .section,
+    .card {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 22px 60px rgba(15, 23, 42, 0.07);
+    }
+
+    .hero-panel {
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 28px;
+      padding: 34px;
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at top right, rgba(226, 232, 240, 0.9), transparent 30%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.92));
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 10.8ch;
+      font-size: clamp(3rem, 6vw, 5rem);
+      line-height: 0.95;
+    }
+
+    .lead {
+      max-width: 68ch;
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.8;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .side-panel {
+      display: grid;
+      gap: 16px;
+      padding: 26px;
+      border-radius: var(--radius-xl);
+    }
+
+    .side-panel h2,
+    .section-head h2 {
+      font-size: clamp(1.8rem, 3.4vw, 3rem);
+      line-height: 0.98;
+    }
+
+    .summary-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .summary-item {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface);
+    }
+
+    .summary-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-family: "Fraunces", serif;
+      font-size: 1.35rem;
+      line-height: 1;
+    }
+
+    .summary-item span {
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.94rem;
+    }
+
+    .section {
+      padding: 28px;
+      border-radius: var(--radius-xl);
+      margin-top: 22px;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .section-head p {
+      max-width: 72ch;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .grid-2,
+    .grid-3 {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      box-shadow: none;
+      background: #ffffff;
+    }
+
+    .card h3 {
+      font-size: 1.45rem;
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.96rem;
+    }
+
+    .note {
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(15, 23, 42, 0.16);
+      background: var(--surface-strong);
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .table {
+      display: grid;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 0.82fr 1fr 2.2fr;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .row:last-child {
+      border-bottom: none;
+    }
+
+    .cell {
+      padding: 14px;
+      color: var(--muted);
+      line-height: 1.55;
+      border-right: 1px solid var(--line);
+      font-size: 0.93rem;
+    }
+
+    .cell:last-child {
+      border-right: none;
+    }
+
+    .head .cell {
+      background: var(--surface-strong);
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    ul.clean-list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    ul.clean-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    ul.clean-list li::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      margin-top: 9px;
+      border-radius: 50%;
+      background: #475569;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 980px) {
+      .topbar-inner,
+      .hero {
+        align-items: flex-start;
+        grid-template-columns: 1fr;
+      }
+
+      .topbar-inner {
+        flex-direction: column;
+        border-radius: 28px;
+      }
+
+      .nav {
+        justify-content: flex-start;
+      }
+
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+      }
+
+      .cell {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .cell:last-child {
+        border-bottom: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
+        <div class="brand">
+          <strong>GTrust</strong>
+          <span>Especificación técnica para @medellin</span>
+        </div>
+        <nav class="nav" aria-label="Navegación técnica">
+          <a class="chip" href="/propuesta-medellin/">Propuesta comercial</a>
+          <a class="chip" href="/propuesta-medellin/pdf/">PDF comercial</a>
+          <a class="chip" href="#stack">Stack</a>
+          <a class="chip" href="#infraestructura">Infraestructura</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="hero">
+        <article class="hero-panel">
+          <div style="display: grid; gap: 22px;">
+            <span class="eyebrow">Especificación técnica</span>
+            <h1>Arquitectura técnica para agentes IA tutores y retención educativa.</h1>
+            <p class="lead">
+              Esta sección complementa la propuesta comercial de GTrust para @medellin con la arquitectura de canales,
+              modelos, backend, frontend, datos, control de consumo e infraestructura prevista para la solución.
+            </p>
+          </div>
+          <div class="actions">
+            <a class="button primary" href="/propuesta-medellin/tecnica/pdf/">Descargar PDF técnico</a>
+            <a class="button" href="#canales">Ver especificación</a>
+          </div>
+        </article>
+
+        <aside class="side-panel">
+          <h2>Resumen técnico</h2>
+          <div class="summary-grid">
+            <div class="summary-item"><strong>2 canales</strong><span>Web para tutoría del curso y WhatsApp para motivación y retención.</span></div>
+            <div class="summary-item"><strong>Doble modelo</strong><span>Modelo primario Gemini 2.5 Flash y fallback GPT-5.4 nano.</span></div>
+            <div class="summary-item"><strong>100.000 tokens</strong><span>Límite diario acumulable por estudiante, con alertas al superar el 80%.</span></div>
+            <div class="summary-item"><strong>2 opciones</strong><span>Servicio administrado por GTrust o despliegue en infraestructura de @medellin.</span></div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section" id="canales">
+        <div class="section-head">
+          <span class="eyebrow">Canales de interacción</span>
+          <h2>Dos canales complementarios con responsabilidades separadas</h2>
+          <p>La solución opera sobre canales distintos para evitar mezclar tutoría académica con retención y comunicación operativa.</p>
+        </div>
+
+        <div class="grid-2">
+          <article class="card">
+            <h3>Plataforma web · Agente tutor del curso</h3>
+            <p>
+              El estudiante interactúa con el tutor IA directamente desde el navegador. El agente conoce el contenido exacto del curso,
+              el módulo activo y el historial de cada estudiante. Responde preguntas, refuerza conceptos y evalúa el avance de forma conversacional.
+            </p>
+            <p style="margin-top: 12px;">
+              Su ámbito de conversación está estrictamente delimitado al contenido del curso asignado: no responde consultas externas,
+              no ejecuta tareas de otras materias y no procesa solicitudes ajenas al programa.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>WhatsApp · Agente de motivación y retención</h3>
+            <p>
+              Un agente independiente contacta proactivamente a los estudiantes por WhatsApp con mensajes de motivación,
+              recordatorios de avance y alertas de inactividad. Su función no es tutorizar: es mantener el vínculo del estudiante
+              con el curso y reducir la deserción.
+            </p>
+            <p style="margin-top: 12px;">
+              Opera exclusivamente con estudiantes que hayan otorgado consentimiento previo y sobre lineamientos definidos por @medellin.
+            </p>
+          </article>
+        </div>
+
+        <p class="note" style="margin-top: 16px;">
+          Separación de responsabilidades: el agente tutor web y el agente de retención por WhatsApp son componentes independientes.
+          El agente de WhatsApp no tiene acceso al contenido académico del curso.
+        </p>
+      </section>
+
+      <section class="section" id="stack">
+        <div class="section-head">
+          <span class="eyebrow">Stack tecnológico</span>
+          <h2>Componentes técnicos de la solución</h2>
+          <p>La arquitectura combina modelos de IA, backend especializado, portal web, base de datos e infraestructura cloud.</p>
+        </div>
+
+        <div class="table" role="table" aria-label="Stack tecnológico">
+          <div class="row head" role="row">
+            <div class="cell" role="columnheader">Capa</div>
+            <div class="cell" role="columnheader">Tecnología</div>
+            <div class="cell" role="columnheader">Rol</div>
+          </div>
+          <div class="row" role="row"><div class="cell">Modelo primario</div><div class="cell">Gemini 2.5 Flash (Google)</div><div class="cell">Motor principal de todos los agentes. Razonamiento pedagógico avanzado y respuestas contextuales al contenido del curso.</div></div>
+          <div class="row" role="row"><div class="cell">Modelo fallback</div><div class="cell">GPT-5.4 nano (OpenAI)</div><div class="cell">Activado automáticamente ante cualquier falla o saturación del modelo primario. Garantiza continuidad sin intervención humana.</div></div>
+          <div class="row" role="row"><div class="cell">Canal WhatsApp</div><div class="cell">WhatsApp Cloud API (Meta)</div><div class="cell">Integración oficial verificada. Número Business dedicado por agente, configurable según necesidad.</div></div>
+          <div class="row" role="row"><div class="cell">Backend agentes</div><div class="cell">LiteLLM</div><div class="cell">Framework de alta concurrencia para agentes LLM, bajo consumo de memoria y tipado fuerte.</div></div>
+          <div class="row" role="row"><div class="cell">API administrativa</div><div class="cell">Python + FastAPI</div><div class="cell">Autenticación, gestión de cursos, usuarios y configuración.</div></div>
+          <div class="row" role="row"><div class="cell">Frontend</div><div class="cell">Next.js + React</div><div class="cell">Dashboard de administración y portal web del estudiante.</div></div>
+          <div class="row" role="row"><div class="cell">Base de datos</div><div class="cell">PostgreSQL</div><div class="cell">Datos relacionales de estudiantes, cursos y conversaciones.</div></div>
+          <div class="row" role="row"><div class="cell">Infraestructura</div><div class="cell">Google Cloud Platform</div><div class="cell">Cloud Run, Cloud SQL, Pub/Sub y Cloud Storage.</div></div>
+        </div>
+
+        <p class="note" style="margin-top: 16px;">
+          La arquitectura de doble modelo garantiza disponibilidad continua incluso ante interrupciones del proveedor principal.
+          La conmutación entre modelos es automática y transparente para el estudiante.
+        </p>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <span class="eyebrow">Inteligencia contextual</span>
+          <h2>El agente responde con contexto específico, no con información genérica</h2>
+          <p>Antes de formular cada respuesta, el agente construye un contexto específico para ese estudiante, esa lección y ese momento de aprendizaje.</p>
+        </div>
+
+        <div class="grid-2">
+          <article class="card">
+            <h3>Contexto que usa el agente</h3>
+            <ul class="clean-list">
+              <li>Instrucciones pedagógicas del curso: tono, restricciones y comportamiento definidos por el docente.</li>
+              <li>Perfil del estudiante: nivel actual, progreso y objetivos de aprendizaje.</li>
+              <li>Contexto de la lección activa: conceptos a enfatizar, errores comunes y ejemplos del ejercicio en curso.</li>
+              <li>Historial de la sesión: últimos turnos de la conversación activa.</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Diferencia frente a un chatbot genérico</h3>
+            <p>
+              El ensamblado dinámico de contexto permite que cada respuesta sea específica para ese estudiante,
+              en esa lección y en ese momento de su aprendizaje.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <span class="eyebrow">Control de consumo</span>
+          <h2>Límites configurables por estudiante</h2>
+          <p>
+            Cada estudiante tiene asignado un límite de 100.000 tokens diarios. Los tokens no consumidos se acumulan automáticamente
+            para el día siguiente.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card"><h3>Acumulación diaria</h3><p>Si un estudiante usa 40.000 tokens hoy, mañana dispone de 160.000. Esto evita penalizar ritmos de estudio irregulares.</p></article>
+          <article class="card"><h3>Reglas configurables</h3><p>El administrador define si el sistema bloquea al estudiante al alcanzar el límite acumulado o si simplemente le notifica.</p></article>
+          <article class="card"><h3>Alertas docentes</h3><p>Cuando el consumo supera el 80% del límite disponible, el docente recibe una alerta automática.</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="infraestructura">
+        <div class="section-head">
+          <span class="eyebrow">Responsabilidades de infraestructura</span>
+          <h2>Dos modelos de operación con responsabilidades claras</h2>
+        </div>
+
+        <div class="grid-2">
+          <article class="card">
+            <h3>Opción 1 · Servicio administrado por GTrust</h3>
+            <p>GTrust opera la solución completa, incluyendo infraestructura en la nube y consumo de APIs de IA. @medellin no asume costos de infraestructura.</p>
+          </article>
+          <article class="card">
+            <h3>Opción 2 · Infraestructura de @medellin</h3>
+            <p>
+              @medellin provee y costea la infraestructura de Google Cloud Platform y las claves de acceso a los modelos de IA.
+              GTrust despliega la solución sobre esa infraestructura y entrega el conocimiento para su operación autónoma.
+            </p>
+          </article>
+        </div>
+
+        <p class="note" style="margin-top: 16px;">
+          En ambas opciones, agregar nuevos agentes es una operación de configuración, no de desarrollo. En la Opción 2,
+          cada bloque adicional puede requerir escalar los recursos contratados con el proveedor cloud. GTrust acompaña esa evaluación
+          antes de cada activación.
+        </p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
