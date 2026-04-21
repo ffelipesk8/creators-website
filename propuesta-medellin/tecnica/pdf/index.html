@@ -200,9 +200,9 @@
     }
 
     .hero h1 {
-      max-width: 12ch;
-      font-size: clamp(2.6rem, 6vw, 4.1rem);
-      line-height: 0.96;
+      max-width: 16ch;
+      font-size: clamp(2.35rem, 5vw, 3.35rem);
+      line-height: 0.98;
     }
 
     .lead {
@@ -216,8 +216,6 @@
       padding-top: 24px;
       margin-top: 24px;
       border-top: 1px solid var(--line);
-      break-inside: avoid;
-      page-break-inside: avoid;
     }
 
     .section h2 {
@@ -281,38 +279,35 @@
       page-break-inside: avoid;
     }
 
-    .table {
-      display: grid;
+    .tech-table {
+      width: 100%;
       border: 1px solid var(--line);
       border-radius: 14px;
+      border-spacing: 0;
+      border-collapse: separate;
       overflow: hidden;
-      break-inside: avoid;
-      page-break-inside: avoid;
-    }
-
-    .row {
-      display: grid;
-      grid-template-columns: 0.85fr 1fr 2.1fr;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .row:last-child {
-      border-bottom: 0;
     }
 
     .cell {
       padding: 11px;
       border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
       color: var(--muted);
       font-size: 0.84rem;
       line-height: 1.45;
+      text-align: left;
+      vertical-align: top;
     }
 
     .cell:last-child {
       border-right: 0;
     }
 
-    .head .cell {
+    tr:last-child .cell {
+      border-bottom: 0;
+    }
+
+    thead .cell {
       background: var(--surface);
       color: var(--ink);
       font-weight: 800;
@@ -370,20 +365,31 @@
         grid-template-columns: 1fr;
       }
 
-      .row {
-        grid-template-columns: 1fr;
+      .tech-table,
+      .tech-table thead,
+      .tech-table tbody,
+      .tech-table tr,
+      .tech-table .cell {
+        display: block;
+      }
+
+      .tech-table tr {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .tech-table tr:last-child {
+        border-bottom: 0;
       }
 
       .cell {
         border-right: 0;
-        border-bottom: 1px solid var(--line);
       }
     }
 
     @media print {
       @page {
         size: A4 portrait;
-        margin: 14mm 12mm;
+        margin: 9mm 9mm;
       }
 
       html,
@@ -413,17 +419,110 @@
         box-shadow: none !important;
       }
 
-      .section,
-      .card,
-      .note,
-      .table {
+      .section {
+        padding-top: 10px;
+        margin-top: 10px;
+        break-inside: auto;
+        page-break-inside: auto;
+      }
+
+      .doc-header {
+        padding-bottom: 9px;
+        margin-bottom: 10px;
+      }
+
+      .hero {
+        gap: 7px;
+        margin-bottom: 10px;
+      }
+
+      .hero h1 {
+        max-width: 28ch;
+        font-size: 1.75rem;
+        line-height: 1.04;
+      }
+
+      .lead,
+      .section > p {
+        margin-bottom: 9px;
+        font-size: 0.82rem;
+        line-height: 1.34;
+      }
+
+      .section h2 {
+        max-width: none;
+        margin-bottom: 6px;
+        font-size: 1.22rem;
+        line-height: 1.08;
+      }
+
+      .eyebrow {
+        padding: 5px 8px;
+        font-size: 0.62rem;
+      }
+
+      .grid-2,
+      .grid-3 {
+        gap: 8px;
+      }
+
+      .card {
+        padding: 9px;
+        border-radius: 11px;
+      }
+
+      .card h3 {
+        margin-bottom: 4px;
+        font-size: 0.92rem;
+      }
+
+      .card p,
+      .card li,
+      .cell {
+        font-size: 0.71rem;
+        line-height: 1.28;
+      }
+
+      .note {
+        padding: 8px;
+        border-radius: 11px;
+        font-size: 0.72rem;
+        line-height: 1.3;
+      }
+
+      .cell {
+        padding: 6px 7px;
+      }
+
+      .tech-table {
+        break-inside: auto;
+        page-break-inside: auto;
+      }
+
+      .tech-table tr {
         break-inside: avoid;
         page-break-inside: avoid;
       }
 
-      .section {
-        padding-top: 18px;
-        margin-top: 18px;
+      ul.clean-list {
+        gap: 5px;
+      }
+
+      ul.clean-list li {
+        gap: 7px;
+      }
+
+      ul.clean-list li::before {
+        width: 5px;
+        height: 5px;
+        margin-top: 6px;
+      }
+
+      .footer-note {
+        margin-top: 12px;
+        padding-top: 10px;
+        font-size: 0.68rem;
+        line-height: 1.35;
       }
     }
   </style>
@@ -484,17 +583,21 @@
       <section class="section">
         <span class="eyebrow">Stack tecnológico</span>
         <h2>Componentes técnicos</h2>
-        <div class="table" role="table" aria-label="Stack tecnológico">
-          <div class="row head" role="row"><div class="cell">Capa</div><div class="cell">Tecnología</div><div class="cell">Rol</div></div>
-          <div class="row" role="row"><div class="cell">Modelo primario</div><div class="cell">Gemini 2.5 Flash (Google)</div><div class="cell">Motor principal de todos los agentes. Razonamiento pedagógico avanzado y respuestas contextuales al contenido del curso.</div></div>
-          <div class="row" role="row"><div class="cell">Modelo fallback</div><div class="cell">GPT-5.4 nano (OpenAI)</div><div class="cell">Activado automáticamente ante cualquier falla o saturación del modelo primario. Garantiza continuidad sin intervención humana.</div></div>
-          <div class="row" role="row"><div class="cell">Canal WhatsApp</div><div class="cell">WhatsApp Cloud API (Meta)</div><div class="cell">Integración oficial verificada. Número Business dedicado por agente, configurable.</div></div>
-          <div class="row" role="row"><div class="cell">Backend agentes</div><div class="cell">LiteLLM</div><div class="cell">Framework de alta concurrencia para agentes LLM. Bajo consumo de memoria, tipado fuerte.</div></div>
-          <div class="row" role="row"><div class="cell">API administrativa</div><div class="cell">Python + FastAPI</div><div class="cell">Autenticación, gestión de cursos, usuarios y configuración.</div></div>
-          <div class="row" role="row"><div class="cell">Frontend</div><div class="cell">Next.js + React</div><div class="cell">Dashboard de administración y portal web del estudiante.</div></div>
-          <div class="row" role="row"><div class="cell">Base de datos</div><div class="cell">PostgreSQL</div><div class="cell">Datos relacionales de estudiantes, cursos y conversaciones.</div></div>
-          <div class="row" role="row"><div class="cell">Infraestructura</div><div class="cell">Google Cloud Platform</div><div class="cell">Cloud Run, Cloud SQL, Pub/Sub y Cloud Storage.</div></div>
-        </div>
+        <table class="tech-table" aria-label="Stack tecnológico">
+          <thead>
+            <tr><th class="cell" scope="col">Capa</th><th class="cell" scope="col">Tecnología</th><th class="cell" scope="col">Rol</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="cell">Modelo primario</td><td class="cell">Gemini 2.5 Flash (Google)</td><td class="cell">Motor principal de todos los agentes. Razonamiento pedagógico avanzado y respuestas contextuales al contenido del curso.</td></tr>
+            <tr><td class="cell">Modelo fallback</td><td class="cell">GPT-5.4 nano (OpenAI)</td><td class="cell">Activado automáticamente ante cualquier falla o saturación del modelo primario. Garantiza continuidad sin intervención humana.</td></tr>
+            <tr><td class="cell">Canal WhatsApp</td><td class="cell">WhatsApp Cloud API (Meta)</td><td class="cell">Integración oficial verificada. Número Business dedicado por agente, configurable.</td></tr>
+            <tr><td class="cell">Backend agentes</td><td class="cell">LiteLLM</td><td class="cell">Framework de alta concurrencia para agentes LLM. Bajo consumo de memoria, tipado fuerte.</td></tr>
+            <tr><td class="cell">API administrativa</td><td class="cell">Python + FastAPI</td><td class="cell">Autenticación, gestión de cursos, usuarios y configuración.</td></tr>
+            <tr><td class="cell">Frontend</td><td class="cell">Next.js + React</td><td class="cell">Dashboard de administración y portal web del estudiante.</td></tr>
+            <tr><td class="cell">Base de datos</td><td class="cell">PostgreSQL</td><td class="cell">Datos relacionales de estudiantes, cursos y conversaciones.</td></tr>
+            <tr><td class="cell">Infraestructura</td><td class="cell">Google Cloud Platform</td><td class="cell">Cloud Run, Cloud SQL, Pub/Sub y Cloud Storage.</td></tr>
+          </tbody>
+        </table>
         <p class="note" style="margin-top: 14px;">La arquitectura de doble modelo garantiza disponibilidad continua incluso ante interrupciones del proveedor principal. La conmutación entre modelos es automática y transparente para el estudiante.</p>
       </section>
 
