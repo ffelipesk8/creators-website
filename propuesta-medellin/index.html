@@ -489,6 +489,7 @@
     }
 
     .options-grid,
+    .proposal-map,
     .scale-grid,
     .process-grid,
     .mini-grid {
@@ -496,6 +497,7 @@
       gap: 20px;
     }
 
+    .proposal-map,
     .options-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 24px;
@@ -658,6 +660,22 @@
       margin-top: 4px;
       flex-shrink: 0;
       color: #475569;
+    }
+
+    .map-card-heading {
+      display: grid;
+      gap: 10px;
+    }
+
+    .map-card-heading h3 {
+      font-size: 1.9rem;
+      line-height: 0.98;
+    }
+
+    .map-card-heading p {
+      color: var(--text-soft);
+      line-height: 1.75;
+      font-size: 0.98rem;
     }
 
     .dark-card .feature-list svg {
@@ -1420,7 +1438,8 @@
             <span class="brand-subtitle">Propuesta institucional para @medellin</span>
           </div>
           <nav class="topbar-nav" aria-label="Secciones de la propuesta">
-            <a class="nav-chip" href="#opciones">Opciones</a>
+            <a class="nav-chip" href="#estructura">Ruta de lectura</a>
+            <a class="nav-chip" href="#opciones">Agentes IA</a>
             <a class="nav-chip" href="/propuesta-medellin/cursos/">Cursos</a>
             <a class="nav-chip" href="#dashboard">Dashboard</a>
             <a class="nav-chip" href="#escalabilidad">Escalabilidad</a>
@@ -1440,9 +1459,9 @@
               <div style="display: grid; gap: 22px;">
                 <h1 id="hero-title">Acompañamiento inteligente para estudiantes, con una propuesta clara, medible y escalable.</h1>
                 <p class="lead">
-                  GTrust propone una solución de agentes IA tutores para fortalecer la experiencia educativa de @medellin,
-                  resolver dudas en tiempo real y ofrecer control institucional a través de métricas de uso, desempeño,
-                  seguimiento personalizado y alternativas de escalabilidad por volumen.
+                  GTrust presenta esta propuesta en dos frentes complementarios para @medellin: primero, una solución de
+                  agentes IA tutores con dos opciones de implementación; segundo, una ruta de cursos y contenidos con dos
+                  modelos posibles según el nivel de profundidad y acompañamiento que se quiera construir.
                 </p>
               </div>
             </div>
@@ -1476,9 +1495,9 @@
               </div>
 
               <div class="hero-note">
-                <span>Enfoque institucional</span>
-                <span>Sin fricción para operación</span>
-                <span>Listo para imprimir en PDF</span>
+                <span>1. Agentes IA tutores</span>
+                <span>2. Cursos y contenidos</span>
+                <span>3. Especificación técnica</span>
               </div>
             </div>
           </article>
@@ -1523,11 +1542,67 @@
         </div>
       </section>
 
+      <section id="estructura" aria-labelledby="structure-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">Ruta de lectura</span>
+            <h2 id="structure-title">Cómo está organizada la propuesta para encontrar todo con claridad</h2>
+            <p>
+              La propuesta está dividida en dos bloques principales. El primero presenta la solución de agentes IA tutores y sus
+              dos alternativas de implementación. El segundo presenta la capa de cursos y contenidos, también con dos rutas
+              posibles. Desde aquí se puede identificar rápidamente qué revisar según el interés de cada lector.
+            </p>
+          </div>
+
+          <div class="proposal-map">
+            <article class="content-card reveal">
+              <span class="label">Bloque 1</span>
+              <div class="map-card-heading">
+                <h3>Agentes IA tutores</h3>
+                <p>
+                  Esta parte concentra la solución principal de acompañamiento al estudiante, la lógica de operación,
+                  la inversión por agente, la escalabilidad y el dashboard institucional.
+                </p>
+              </div>
+              <ul class="feature-list" aria-label="Contenido del bloque de agentes IA tutores">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Opción 1: servicio administrado por GTrust.</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Opción 2: implementación en infraestructura de @medellin.</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Incluye dashboard, escalabilidad y modelo de implementación.</li>
+              </ul>
+              <div class="button-row">
+                <a class="button primary" href="#opciones">Ver agentes IA</a>
+                <a class="button secondary" href="/propuesta-medellin/tecnica/">Ver técnica</a>
+              </div>
+            </article>
+
+            <article class="content-card reveal reveal-delay-1">
+              <span class="label">Bloque 2</span>
+              <div class="map-card-heading">
+                <h3>Cursos y contenidos</h3>
+                <p>
+                  Esta parte muestra la propuesta de producción y estructura de cursos, con comparativo frente a Moodle,
+                  rutas sugeridas y activos pedagógicos que fortalecen el agente.
+                </p>
+              </div>
+              <ul class="feature-list" aria-label="Contenido del bloque de cursos y contenidos">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Propuesta A: rehacer cursos existentes con inversión más controlada.</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Propuesta B: curso completamente agéntico con mayor diferenciación.</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Incluye comparativo de inversión, funcionalidades y recomendación sugerida.</li>
+              </ul>
+              <div class="button-row">
+                <a class="button primary" href="/propuesta-medellin/cursos/">Ver cursos</a>
+                <a class="button secondary" href="/propuesta-medellin/cursos/pdf/">PDF cursos</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section id="opciones" aria-labelledby="options-title">
         <div class="container">
           <div class="section-head reveal">
-            <span class="eyebrow">Opciones de implementación</span>
-            <h2 id="options-title">Dos rutas claras de implementación</h2>
+            <span class="eyebrow">Agentes IA tutores</span>
+            <h2 id="options-title">Dos rutas claras para implementar la solución de agentes</h2>
             <p>
               La propuesta está diseñada para que @medellin elija entre una operación completamente administrada por GTrust
               o una implementación propia con transferencia de conocimiento.
