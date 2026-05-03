@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GTrust | Cursos PDF para @medellin</title>
+  <meta name="description" content="Documento PDF de cursos y contenidos de GTrust para @medellin." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --paper:#fff; --ink:#0f172a; --muted:#475569; --soft:#64748b; --line:#d9dee7; --surface:#f8fafc; --accent:#111827; --content-width:900px; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html { background:#eef2f7; }
+    body { min-width:320px; font-family:"Inter",sans-serif; color:var(--ink); background:#eef2f7; -webkit-font-smoothing:antialiased; }
+    a { color:inherit; text-decoration:none; }
+    button { font:inherit; border:0; background:none; color:inherit; cursor:pointer; }
+    h1,h2,h3 { font-family:"Fraunces",serif; letter-spacing:-.04em; color:var(--ink); }
+    .shell { padding:28px 16px 48px; }
+    .toolbar { position:sticky; top:14px; z-index:20; display:flex; justify-content:center; margin-bottom:18px; }
+    .toolbar-inner { width:min(calc(100% - 8px), var(--content-width)); display:flex; justify-content:space-between; align-items:center; gap:14px; padding:14px 16px; border:1px solid rgba(15,23,42,.08); border-radius:999px; background:rgba(255,255,255,.9); backdrop-filter:blur(14px); box-shadow:0 20px 50px rgba(15,23,42,.08); }
+    .toolbar-copy { display:grid; gap:2px; min-width:0; }
+    .toolbar-copy strong { font-size:.95rem; font-weight:800; }
+    .toolbar-copy span { color:var(--soft); font-size:.82rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .toolbar-actions { display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    .button { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:0 16px; border:1px solid var(--line); border-radius:999px; background:#fff; color:var(--ink); font-weight:700; white-space:nowrap; }
+    .button.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+    .sheet { width:min(100%, var(--content-width)); margin:0 auto; padding:34px 36px 40px; border:1px solid rgba(15,23,42,.08); border-radius:24px; background:var(--paper); box-shadow:0 28px 70px rgba(15,23,42,.08); }
+    .doc-header { display:flex; justify-content:space-between; align-items:flex-start; gap:18px; padding-bottom:22px; margin-bottom:22px; border-bottom:1px solid var(--line); }
+    .brand { display:grid; gap:6px; }
+    .brand h1 { font-size:1.8rem; line-height:1; }
+    .brand p,.doc-meta,.lead,.section > p,.card p,.note { color:var(--muted); font-size:.94rem; line-height:1.65; }
+    .doc-meta { text-align:right; }
+    .hero { display:grid; gap:16px; margin-bottom:22px; }
+    .eyebrow,.tag { display:inline-flex; width:fit-content; padding:8px 12px; border:1px solid var(--line); border-radius:999px; background:var(--surface); color:var(--muted); font-size:.76rem; font-weight:800; letter-spacing:.05em; text-transform:uppercase; }
+    .tag { margin-bottom:10px; color:var(--soft); font-size:.72rem; }
+    .hero h1 { max-width:16ch; font-size:clamp(2.2rem,5vw,3.2rem); line-height:.98; }
+    .section { padding-top:20px; margin-top:20px; border-top:1px solid var(--line); }
+    .section h2 { margin-bottom:10px; font-size:1.8rem; line-height:1; }
+    .summary-grid,.cards-grid,.functional-grid { display:grid; gap:12px; margin-top:14px; }
+    .summary-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+    .cards-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .functional-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .mini,.card { padding:14px; border:1px solid var(--line); border-radius:14px; background:#fff; break-inside:avoid; page-break-inside:avoid; }
+    .mini strong { display:block; margin-bottom:6px; font-family:"Fraunces",serif; font-size:1.35rem; line-height:1; }
+    .mini span { color:var(--soft); font-size:.82rem; line-height:1.45; }
+    .card h3 { margin-bottom:6px; font-size:1.2rem; line-height:1.06; }
+    table { width:100%; margin-top:14px; border-collapse:collapse; border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+    th,td { padding:10px 11px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; font-size:.82rem; line-height:1.45; }
+    th { background:var(--surface); color:var(--ink); font-weight:800; }
+    td { color:var(--muted); }
+    tr:last-child td { border-bottom:0; }
+    .highlight td { background:rgba(248,250,252,.8); color:var(--ink); font-weight:700; }
+    .note { margin-top:12px; padding:12px 14px; border:1px solid var(--line); border-radius:14px; background:var(--surface); break-inside:avoid; page-break-inside:avoid; }
+    ul.clean-list { list-style:none; display:grid; gap:8px; margin-top:14px; }
+    ul.clean-list li { display:flex; gap:8px; align-items:flex-start; color:var(--muted); font-size:.9rem; line-height:1.52; }
+    ul.clean-list li::before { content:""; width:7px; height:7px; margin-top:8px; border-radius:50%; background:#475569; flex-shrink:0; }
+    .footer-note { margin-top:22px; padding-top:14px; border-top:1px solid var(--line); color:var(--soft); font-size:.8rem; line-height:1.5; }
+    @media (max-width:920px) { .toolbar-inner,.sheet,.summary-grid,.cards-grid,.functional-grid { width:100%; grid-template-columns:1fr; } .toolbar-inner,.doc-header { flex-direction:column; align-items:flex-start; } .doc-meta { text-align:left; } }
+    @media print { @page { size:A4 portrait; margin:10mm 9mm; } html,body { background:#fff !important; } body { -webkit-print-color-adjust:exact; print-color-adjust:exact; } .shell { padding:0 !important; } .toolbar { display:none !important; } .sheet { width:100% !important; max-width:none !important; padding:0 !important; border:none !important; border-radius:0 !important; box-shadow:none !important; } .section { padding-top:12px; margin-top:12px; } .hero { gap:8px; margin-bottom:12px; } .hero h1 { max-width:22ch; font-size:1.95rem; } .lead,.section > p,.card p,.note,ul.clean-list li,th,td { font-size:.73rem; line-height:1.3; } .section h2 { font-size:1.24rem; margin-bottom:7px; } .mini,.card { padding:10px; } .mini strong { font-size:1rem; } }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="toolbar">
+      <div class="toolbar-inner">
+        <div class="toolbar-copy">
+          <strong>GTrust · Cursos para @medellin</strong>
+          <span>Documento optimizado para exportar como PDF.</span>
+        </div>
+        <div class="toolbar-actions">
+          <a class="button" href="/propuesta-medellin/cursos/">Volver a cursos</a>
+          <a class="button" href="/propuesta-medellin/pdf/">PDF comercial</a>
+          <button class="button primary" type="button" id="print-document">Imprimir / Guardar PDF</button>
+        </div>
+      </div>
+    </div>
+    <article class="sheet">
+      <header class="doc-header">
+        <div class="brand">
+          <h1>GTrust</h1>
+          <p>Cursos y contenidos para @medellin · Complemento de propuesta institucional.</p>
+        </div>
+        <div class="doc-meta">Mayo 2026<br />Documento de cursos</div>
+      </header>
+      <section class="hero">
+        <span class="eyebrow">Cursos y contenidos</span>
+        <h1>Dos rutas para construir cursos con más valor pedagógico y mejor relación costo-capacidad.</h1>
+        <p class="lead">Este documento organiza la información del comparativo entre Moodle y la plataforma GTrust para rehacer cursos o diseñar una experiencia completamente agéntica.</p>
+      </section>
+      <section class="section">
+        <h2>Resumen ejecutivo</h2>
+        <div class="summary-grid">
+          <div class="mini"><strong>2 propuestas</strong><span>Rehacer cursos o construir una experiencia agéntica.</span></div>
+          <div class="mini"><strong>$11M</strong><span>Ahorro estimado en la Propuesta A frente a Moodle.</span></div>
+          <div class="mini"><strong>$26.3M</strong><span>Ahorro estimado en la Propuesta B frente a Moodle.</span></div>
+          <div class="mini"><strong>Lecturas = cerebro</strong><span>En GTrust, las lecturas alimentan directamente el agente.</span></div>
+        </div>
+        <div class="note">Cada lectura cuesta lo mismo en ambas plataformas. La diferencia estratégica es si la institución compra archivos para montar o una base de conocimiento que fortalece el agente.</div>
+      </section>
+      <section class="section">
+        <h2>Comparativo general</h2>
+        <div class="cards-grid">
+          <div class="card">
+            <span class="tag">Propuesta A</span>
+            <h3>Rehacer cursos existentes</h3>
+            <p>Reconstrucción de cursos con activos mixtos y agente estándar.</p>
+            <ul class="clean-list"><li>Moodle: $69.5M</li><li>GTrust: $58.5M</li><li>Ahorro estimado: $11M</li></ul>
+          </div>
+          <div class="card">
+            <span class="tag">Propuesta B</span>
+            <h3>Curso completamente agéntico</h3>
+            <p>El agente es la experiencia central del curso.</p>
+            <ul class="clean-list"><li>Moodle: $92.5M</li><li>GTrust: $66.2M</li><li>Ahorro estimado: $26.3M</li></ul>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <h2>Propuesta A · Rehacer cursos</h2>
+        <table aria-label="Propuesta A">
+          <thead><tr><th>Recurso</th><th>Moodle</th><th>GTrust</th></tr></thead>
+          <tbody>
+            <tr><td>Videos con IA</td><td>4 · $12M</td><td>4 · $12M</td></tr>
+            <tr><td>Videos curados</td><td>10 · $3.5M</td><td>10 · $3.5M</td></tr>
+            <tr><td>Libros interactivos</td><td>2 · $5M</td><td>2 · $5M</td></tr>
+            <tr><td>Lecturas</td><td>8 · $8M</td><td>8 · $8M</td></tr>
+            <tr><td>Podcasts</td><td>1 · $1M</td><td>1 · $1M</td></tr>
+            <tr><td>Infografías</td><td>12 · $3M</td><td>12 · $3M</td></tr>
+            <tr><td>Cuestionarios</td><td>5 · $2.25M</td><td>5 · $2.25M</td></tr>
+            <tr><td>Diseño + QA</td><td>$3.75M</td><td>$3.75M</td></tr>
+            <tr><td>Montaje plataforma</td><td>$9M</td><td>$2M</td></tr>
+            <tr><td>Agente IA estándar</td><td>$22M</td><td>$18M</td></tr>
+            <tr class="highlight"><td>Total con agente</td><td>$69.5M</td><td>$58.5M</td></tr>
+          </tbody>
+        </table>
+        <div class="note">En GTrust, el agente estándar funciona como una capacidad nativa sobre lecturas y libros. En Moodle requiere una capa custom más costosa.</div>
+      </section>
+      <section class="section">
+        <h2>Propuesta B · Curso agéntico</h2>
+        <table aria-label="Propuesta B">
+          <thead><tr><th>Recurso</th><th>Moodle</th><th>GTrust</th></tr></thead>
+          <tbody>
+            <tr><td>Videos con IA seed</td><td>3 · $9M</td><td>3 · $9M</td></tr>
+            <tr><td>Lecturas como cerebro principal</td><td>15 · $15M</td><td>15 · $15M</td></tr>
+            <tr><td>Libros interactivos</td><td>1 · $2.5M</td><td>1 · $2.5M</td></tr>
+            <tr><td>Cuestionarios adaptativos</td><td>10 · $4.5M</td><td>10 · $4.5M</td></tr>
+            <tr><td>Infografías</td><td>12 · $3M</td><td>12 · $3M</td></tr>
+            <tr><td>Diseño + QA</td><td>$6M</td><td>$6M</td></tr>
+            <tr><td>Montaje plataforma</td><td>$7.5M</td><td>$1.2M</td></tr>
+            <tr><td>Agente IA agéntico</td><td>$45M</td><td>$25M</td></tr>
+            <tr class="highlight"><td>Total con agente</td><td>$92.5M</td><td>$66.2M</td></tr>
+          </tbody>
+        </table>
+        <div class="note">La mayor diferencia aparece en el agente agéntico: en GTrust es una capacidad del producto; en Moodle implica un desarrollo dedicado y de mayor costo.</div>
+      </section>
+      <section class="section">
+        <h2>Funcionalidades y activos</h2>
+        <div class="functional-grid">
+          <div class="card"><h3>Videos con IA</h3><p>8 a 10 minutos por pieza para contexto, explicación y activación del curso.</p></div>
+          <div class="card"><h3>Libros interactivos</h3><p>Activos editoriales que en GTrust también alimentan el agente.</p></div>
+          <div class="card"><h3>Lecturas</h3><p>Base de conocimiento que fortalece el cerebro del tutor.</p></div>
+          <div class="card"><h3>Cuestionarios</h3><p>Base y adaptativos para diagnóstico y seguimiento.</p></div>
+          <div class="card"><h3>Infografías y podcasts</h3><p>Soportes complementarios para aprendizaje multimodal.</p></div>
+          <div class="card"><h3>Agentes IA</h3><p>Estándar o agéntico según el nivel de profundidad del curso.</p></div>
+        </div>
+      </section>
+      <section class="section">
+        <h2>Lectura final</h2>
+        <ul class="clean-list">
+          <li>GTrust organiza contenidos y además convierte lecturas y libros en conocimiento útil para el agente.</li>
+          <li>En la Propuesta A, el ahorro estimado es de $11M frente a Moodle.</li>
+          <li>En la Propuesta B, el ahorro estimado es de $26.3M por la diferencia en agente y montaje.</li>
+        </ul>
+      </section>
+      <p class="footer-note">Recomendación para exportar correctamente: en el diálogo de impresión desactiva <strong>Headers and footers</strong> y usa tamaño <strong>A4</strong> con márgenes predeterminados.</p>
+    </article>
+  </div>
+  <script>
+    const printButton = document.getElementById("print-document");
+    if (printButton) {
+      printButton.addEventListener("click", () => window.print());
+    }
+  </script>
+</body>
+</html>
